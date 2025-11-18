@@ -1,0 +1,14 @@
+struct - PascalCase (Ex: AlunosEscola)
+variáveis - camelCase (Ex: numeroAlunos)
+funções - snake_case (Ex: cadastrar_aluno()) 
+
+if{
+
+} 
+else{
+
+}
+
+funcao(){
+
+}
