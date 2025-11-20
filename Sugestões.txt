@@ -1,5 +1,0 @@
-Utilizar um arquivo tipo CSV ou TSV para a gravação de dados.
-o CSV usa vírgulas, enquanto o TSV usa tabulações.
-Ambos os formatos armazenam dados tabulares em formato de texto simples, 
-mas a escolha do delimitador pode afetar a leitura e a compatibilidade,
-com o TSV sendo frequentemente mais fácil de ler como texto puro e menos propenso a conflitos de delimitador.
