@@ -8,7 +8,9 @@ int main(){
 
     setlocale(LC_ALL, "portuguese");
 
-    int menu = -1;
+    Livro acervo[MAX_LIVROS];
+
+    int menu = -1, opcao;
 
     while(menu != 0){
         printf("=============Sistema Biblioteca=============\n\n");
@@ -16,62 +18,62 @@ int main(){
         printf("1 - Carregar Biblioteca\n2 - Listar Livros\n3 - Emprestar livro\n4 - Devolver livro\n5 - Cadastrar Livro\n6 - Salvar biblioteca\n0 - Sair\n\n");
         scanf("%d", &menu);
 
-        while(menu == 1){
-            printf("\nDeseja continuar? (s = sim / n = não) ");
-
-            getchar();
-            if(getchar() != 's'){
-                menu = -1;
-            }
-            printf("\n\n");
+        if(menu == 1){
+            //carregar_biblioteca();
+            printf("\n");
         }
-        while(menu == 2){
-            printf("\nDeseja continuar? (s = sim / n = não) ");
 
-            getchar();
-            if(getchar() != 's'){
-                menu = -1;
-            }
-            printf("\n\n");
+        if(menu == 2){
+            //listar_livros();
+            printf("\n");
         }
+
         while(menu == 3){
-            printf("\nDeseja continuar? (s = sim / n = não) ");
+            
+            //emprestar_livro();
 
-            getchar();
-            if(getchar() != 's'){
+            printf("\nDeseja emprestar outro livro? (1 = sim / 2 = não) ");
+            scanf("%d", &opcao);
+
+            if(opcao != 1){
                 menu = -1;
             }
-            printf("\n\n");
+            printf("\n");
         }
+        
         while(menu == 4){
-            printf("\nDeseja continuar? (s = sim / n = não) ");
+            
+            //devolver_livro();
+            
+            printf("\nDeseja devolver outro livro? (1 = sim / 2 = não) ");
+            scanf("%d", &opcao);
 
-            getchar();
-            if(getchar() != 's'){
+            if(opcao != 1){
                 menu = -1;
             }
-            printf("\n\n");
+            printf("\n");
         }
+        
         while(menu == 5){
-            printf("\nDeseja continuar? (s = sim / n = não) ");
 
-            getchar();
-            if(getchar() != 's'){
+            //cadastrar_livro();
+            
+            printf("\nDeseja cadastrar outro livro? (1 = sim / 2 = não) ");
+            scanf("%d", &opcao);
+
+            if(opcao != 1){
                 menu = -1;
             }
-            printf("\n\n");
+            printf("\n");
         }
-         while(menu == 6){
-            printf("\nDeseja continuar? (s = sim / n = não) ");
-
-            getchar();
-            if(getchar() != 's'){
-                menu = -1;
-            }
-            printf("\n\n");
+        
+        if(menu == 6){
+            //salvar_biblioteca();
+            printf("\n");
         }
     }
 
+    printf("============================================\n");
 
     return 0;
 }
