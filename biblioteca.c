@@ -59,13 +59,60 @@ void emprestar_livro(Livro acervo[], int totalLivros){
   }
 }
 
-void devolver_livro(Livro acervo[], int total_livros){
-  FILE *ptrarquivo = fopen("biblioteca.txt", "w+");
+
+void devolver_livro(Livro acervo[], int totalLivros) {
+    char tituloBusca[100];
+    int encontrado = 0;
+
+    printf("Digite o titulo do livro a ser devolvido: ");
+    fgets(tituloBusca, sizeof(tituloBusca), stdin);
+    tituloBusca[strcspn(tituloBusca, "\n")] = '\0';
+
+    for (int i = 0; i < totalLivros; i++) {
+
+        if (strcmp(acervo[i].titulo, tituloBusca) == 0) {
+
+            if (acervo[i].status == 1) {
+                acervo[i].status = 0;
+                printf("Livro devolvido com sucesso!\n");
+            }
+            else {
+                printf("O livro já está disponível.\n");
+            }
+
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Livro não encontrado.\n");
+    }
 }
 
-void salvar_biblioteca(Livro acervo[], int total_livros){
-  FILE *ptrarquivo = fopen("biblioteca.txt", "w+");
-}
+
+void salvar_biblioteca(Livro acervo[], int totalLivros) {
+    FILE *ptrArquivo = fopen("biblioteca.txt", "w");
+     if (ptrArquivo == NULL) {
+        printf("Erro ao salvar a biblioteca.\n");
+    }
+    else {
+
+        for (int i = 0; i < totalLivros; i++) {
+
+            fprintf(
+                ptrArquivo,
+                "%s/%s/%d\n",
+                acervo[i].titulo,
+                acervo[i].autor,
+                acervo[i].status
+            );
+        }
+
+        fclose(ptrArquivo);
+        printf("Biblioteca salva com sucesso!\n");
+    }
+}    
 
 void carregar_biblioteca(Livro acervo[], int *total_livros){
   FILE *ptrarquivo = fopen("biblioteca.txt", "w+");
