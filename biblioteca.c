@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <locale.h>
+#include <string.h>
 #include "biblioteca.h"
 
-void cadastrar_livro(Livro acervo[], int *totaLivros){
+void cadastrar_livro(Livro acervo[], int *totalLivros){
   
   printf("\n============= Cadastro de livros =============\n\n");
-  if(totalLivros > MAX_LIVROS){
-    printf("Erro! Número máximo de livros cadastrados\n")
+  if(*totalLivros > MAX_LIVROS){
+    printf("Erro! Número máximo de livros cadastrados\n");
   }
   else{
   printf("Título: ");
@@ -22,8 +23,8 @@ void cadastrar_livro(Livro acervo[], int *totaLivros){
   }
 }
 
-void listar_livros(Livro acervo[], int total_livros){
-  for(int i = 0; i < total_livros; i++){
+void listar_livros(Livro acervo[], int totalLivros){
+  for(int i = 0; i < totalLivros; i++){
     printf("--------Livro %d--------\n", i + 1);
     printf("Título: %s\nAutor: %s\nStatus: ", acervo[i].titulo, acervo[i].autor);
     if(acervo[i].status == 0){
@@ -49,21 +50,20 @@ void emprestar_livro(Livro acervo[], int totalLivros){
   scanf(" %99[^\n]", tituloBusca);
   
   for (int i = 0; i < totalLivros; i++){
-    
-  if (strcasecmp(acervo[i].titulo, tituloBusca) == 0){
-    livroEncontrado = 0;
-    
-    if(acervo[i].status == 0){
-      acervo[i].status = 1;
-      printf("Empréstimo de %s feito com sucesso!\n", acervo[i].titulo);
+    if (strcasecmp(acervo[i].titulo, tituloBusca) == 0){
+      livroEncontrado = 0;
+      
+      if(acervo[i].status == 0){
+        acervo[i].status = 1;
+        printf("Empréstimo de %s feito com sucesso!\n", acervo[i].titulo);
+      }
+      else{
+        printf("Erro! %s Já foi emprestado.", acervo[i].titulo);
+      }
     }
-    else{
-      printf("Erro! %s Já foi emprestado.", acervo[i].titulo);
-    }
-  }
   }
   if(livroEncontrado == 1){
-    printf("Erro! Livro não encontrado.\n")
+    printf("Erro! Livro não encontrado.\n");
   }
   }
 }
@@ -108,14 +108,7 @@ void salvar_biblioteca(Livro acervo[], int totalLivros) {
     else {
 
         for (int i = 0; i < totalLivros; i++) {
-
-            fprintf(
-                ptrArquivo,
-                "%s/%s/%d\n",
-                acervo[i].titulo,
-                acervo[i].autor,
-                acervo[i].status
-            );
+          fwrite(&acervo[i], sizeof(Livro), 1, ptrArquivo);
         }
 
         fclose(ptrArquivo);
@@ -123,10 +116,10 @@ void salvar_biblioteca(Livro acervo[], int totalLivros) {
     }
 }    
 
-void carregar_biblioteca(Livro acervo[], int *total_livros){
+void carregar_biblioteca(Livro acervo[], int *totalLivros){
   FILE *ptrarquivo = fopen("biblioteca.txt", "rb");
   
-  printf("%d", *total_livros);
+  printf("%d", *totalLivros);
 
   if(ptrarquivo != NULL){
     
@@ -135,11 +128,11 @@ void carregar_biblioteca(Livro acervo[], int *total_livros){
 
     while((j = fread(&acervo[i], sizeof(Livro), 1, ptrarquivo)) == 1){
       printf("%d ", j);
-      *total_livros = *total_livros + 1;
+      *totalLivros = *totalLivros + 1;
       i++;
     }
 
-    printf("Biblioteca carregada. Total de livros: %d\n", *total_livros);
+    printf("Biblioteca carregada. Total de livros: %d\n", *totalLivros);
   }
   else{
     printf("Erro ao abrir arquivo\n");
