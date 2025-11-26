@@ -39,22 +39,26 @@ int main() {
             
             emprestar_livro(acervo, totalLivros);
 
-            printf("\nDeseja emprestar outro livro? (1 = sim / 2 = não) ");
-            scanf("%d", &opcao);
-
-            if(opcao != 1){
-                menu = -1;
+            if(totalLivros != 0){
+                printf("\nDeseja emprestar outro livro? (1 = sim / 2 = não) ");
+                scanf("%d", &opcao);
+                
+                printf("\n\n");
             }
-            printf("\n\n");
+            if(opcao != 1){
+                    menu = -1;
+            }
         }
         
         while(menu == 4){
             
             devolver_livro(acervo, totalLivros);
             
-            printf("\nDeseja devolver outro livro? (1 = sim / 2 = não) ");
-            scanf("%d", &opcao);
-
+            if(totalLivros != 0){
+                printf("\nDeseja devolver outro livro? (1 = sim / 2 = não) ");
+                scanf("%d", &opcao);
+            }
+            
             if(opcao != 1){
                 menu = -1;
             }
@@ -65,12 +69,15 @@ int main() {
 
             cadastrar_livro(acervo, &totalLivros);
             
-            printf("\nDeseja cadastrar outro livro? (1 = sim / 2 = não) ");
-            scanf("%d", &opcao);
+            if(totalLivros){
+                printf("\nDeseja cadastrar outro livro? (1 = sim / 2 = não) ");
+            
+                scanf("%d", &opcao);
 
-            if(opcao != 1){
-                menu = -1;
-            }
+                if(opcao != 1){
+                    menu = -1;
+                }
+            } 
             printf("\n\n");
         }
         

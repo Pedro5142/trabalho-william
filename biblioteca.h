@@ -3,10 +3,10 @@
 
 #define MAX_LIVROS 100
 
-typedef struct {
+typedef struct Livro{
     char titulo[100];
     char autor[50];
-    int status; // 0 = disponível, 1 = emprestado
+    int status; // 0 = disponÃ­vel, 1 = emprestado
 } Livro;
 
 void cadastrar_livro(Livro acervo[], int *total_livros);
